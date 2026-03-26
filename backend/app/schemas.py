@@ -17,4 +17,16 @@ class TaskBase(BaseModel):
     blocked_by_id: int | None = None
 
 
+class TaskCreate(TaskBase):
+    pass
+
+
+class TaskUpdate(TaskBase):
+    pass
+
+
+class TaskOut(TaskBase):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
 
