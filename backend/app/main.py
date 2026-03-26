@@ -46,3 +46,16 @@ def _validate_blocked_by(db: Session, task_id: int | None, blocked_by_id: int | 
         raise HTTPException(status_code=400, detail="blocked_by_id does not exist.")
 
 
+@app.get("/tasks", response_model=list[TaskOut])
+def list_tasks(db: Session = Depends(get_db)):
+    tasks = db.execute(select(Task).order_by(Task.due_date.asc(), Task.id.asc())).scalars().all()
+    return tasks
+
+
+@app.get("/tasks/{task_id}", response_model=TaskOut)
+def get_task(task_id: int, db: Session = Depends(get_db)):
+    task = db.get(Task, task_id)
+    if task is None:
+        raise HTTPException(status_code=404, detail="Task not found.")
+    return task
+
