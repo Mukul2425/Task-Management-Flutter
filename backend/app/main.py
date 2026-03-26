@@ -35,5 +35,14 @@ def _startup() -> None:
     init_db()
 
 
+def _validate_blocked_by(db: Session, task_id: int | None, blocked_by_id: int | None) -> None:
+    if blocked_by_id is None:
+        return
+    if task_id is not None and blocked_by_id == task_id:
+        raise HTTPException(status_code=400, detail="A task cannot be blocked by itself.")
+
+    blocker = db.get(Task, blocked_by_id)
+    if blocker is None:
+        raise HTTPException(status_code=400, detail="blocked_by_id does not exist.")
 
 
