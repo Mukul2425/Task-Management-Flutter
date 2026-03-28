@@ -1,0 +1,22 @@
+.DS_Store
+
+# Python
+backend/.venv/
+backend/__pycache__/
+backend/**/*.pyc
+backend/app.db
+
+# Flutter / Dart
+mobile/.dart_tool/
+mobile/build/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/.packages
+mobile/pubspec.lock
+mobile/android/
+mobile/ios/
+mobile/macos/
+mobile/windows/
+mobile/linux/
+mobile/web/
+
